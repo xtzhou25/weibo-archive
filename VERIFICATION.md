@@ -1,8 +1,19 @@
 # 验证记录
 
-对应版本：**0.1.0-beta.1**。最后整理日期：2026-10-28（北京时间）。本文件只保存汇总结果，不包含账号标识、真实正文、Cookie、媒体签名链接或个人截图。
+对应版本：**0.1.0-beta.2**（包含历史验证记录）。最后整理日期：2026-10-28（北京时间）。本文件只保存汇总结果，不包含账号标识、真实正文、Cookie、媒体签名链接或个人截图。
 
-## 2026-10-28：重构与干净环境验证
+## 2026-10-28：轻量便携版
+
+- Python 官方嵌入式 3.13.17；18 个锁定运行依赖。移除浏览器、安装器、缓存及开发测试文件，保留必需的 Playwright / Node 控制驱动。
+- 源码环境与精简后的包内运行时均通过 88 项单元测试 + 19 项系统 Edge 页面测试。
+- 最终业务代码对应的 ZIP 解压到中文/空格路径，逐文件 SHA-256 校验通过；三个 BAT 均可启动，本地图片正常读取。
+- PATH 中没有 Python/py；外部 PYTHONHOME/PYTHONPATH 无效、浏览器缓存为空，仍可启动。
+- 已启动系统 Edge 156.0.4314.50 和 Chrome 156.0.8078.73；系统 Edge 的全新临时会话能显示微博官方二维码。
+- 本次未重复真实账号扫码确认、Cookie 导出及全量下载；这些步骤的历史验证不能冒充本次实测。
+- 浏览器缺失、启动失败后回退 Chrome、自定义路径错误和取消均有自动化测试；不会退回缓存 Chromium 或自动下载浏览器。
+- 本机环境为 Windows 10 22H2 x64。云端 CI 以对应提交的 GitHub Actions 记录为准。
+
+## 2026-10-28：beta.1 重构与干净环境验证
 
 在 Windows x64 / Python 3.13.17 下，新建独立虚拟环境，从 `requirements.txt` 与 `requirements.lock.txt` 安装全部依赖，不使用原虚拟环境的 site-packages。
 
@@ -53,7 +64,6 @@
 ```powershell
 python -m pip install -r requirements.txt
 python -m pip check
-python -m playwright install chromium
 python -m unittest discover -s tests -v
 python -m unittest discover -s tests -p "browser_smoke*.py" -v
 python tools/prepare_release.py

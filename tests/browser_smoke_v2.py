@@ -11,6 +11,7 @@ from aiohttp.test_utils import TestServer
 from playwright.async_api import async_playwright, expect
 
 from archive.comments import normalize_comments
+from archive.browser import launch_browser
 from archive.export import export_archive
 from archive.model import normalize, options
 from archive.reader_v2 import create_reader_app, export_v2
@@ -31,7 +32,7 @@ class ReaderV2BrowserTests(unittest.IsolatedAsyncioTestCase):
         self.store = Store(self.root)
         (self.root / 'media').mkdir()
         self.pw = await async_playwright().start()
-        self.browser = await self.pw.chromium.launch(headless=True)
+        self.browser, _ = await launch_browser(self.pw)
         self.page = await self.browser.new_page()
         self.errors = []
         self.requests = []

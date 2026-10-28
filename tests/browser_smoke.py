@@ -12,6 +12,7 @@ from playwright.async_api import async_playwright, expect
 
 from app import create_app
 from archive.auth import Auth
+from archive.browser import launch_browser
 from archive.engine import Engine
 from archive.transport import Transport
 from archive.export import export_archive
@@ -30,7 +31,7 @@ class BrowserTests(unittest.IsolatedAsyncioTestCase):
         self.server = TestServer(create_app(self.directory.name, self.auth, self.engine))
         await self.server.start_server()
         self.pw = await async_playwright().start()
-        self.browser = await self.pw.chromium.launch(headless=True)
+        self.browser, _ = await launch_browser(self.pw)
         self.page = await self.browser.new_page()
         self.errors = []
         self.page.on('pageerror', lambda error: self.errors.append(str(error)))

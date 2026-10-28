@@ -23,7 +23,7 @@ function render(){
   $('stop').disabled=busy||!active;
   if(!state)return;
   $('auth-badge').textContent=authPhases[a.phase]||a.phase;
-  $('auth-message').textContent=(a.uid?`账号 ${a.name||a.uid} · `:'')+a.message;
+  $('auth-message').textContent=(a.browser?`${a.browser} · `:'')+(a.uid?`账号 ${a.name||a.uid} · `:'')+a.message;
   $('start-hint').textContent=a.ready?(active?'备份任务已启动，请在下方查看进度。':'账号已验证。中断任务会续传，已完成任务会增量更新。'):'登录确认前不能开始备份；请等待上方显示“已登录”。';
   $('phase').textContent=phases[b.phase]||b.phase;
   $('message').textContent=b.message;

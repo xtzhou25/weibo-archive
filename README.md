@@ -1,6 +1,6 @@
 # 微博本地档案 · Weibo Archive
 
-**0.1.0-beta.1** · Windows · 免安装便携版 / Python 源码版 · [MIT](LICENSE)
+**0.1.0-beta.2** · Windows · 免安装便携版 / Python 源码版 · [MIT](LICENSE)
 
 通过微博官方二维码登录，将当前账号可访问的微博、配图、普通视频及评论保存在本机，用 HTML 阅读器离线查看。备份保存文字与媒体、转发、评论父子关系，并支持中断后继续和增量更新。
 
@@ -12,16 +12,16 @@
 
 | 版本 | 下载 | 是否需要安装 Python | 首次启动 |
 | --- | --- | --- | --- |
-| **Windows x64 便携版（推荐）** | [下载便携 ZIP（约 368 MiB）](https://github.com/xtzhou25/weibo-archive/releases/download/v0.1.0-beta.1/weibo-archive-v0.1.0-beta.1-windows-x64-portable.zip) | **不需要**，自带 Python、全部依赖和 Chromium | 直接启动，无需下载依赖或浏览器 |
-| 源码版 | [下载源码 ZIP（约 149 KiB）](https://github.com/xtzhou25/weibo-archive/releases/download/v0.1.0-beta.1/weibo-archive-v0.1.0-beta.1-windows.zip) | 需要 Python 3.12+，推荐 3.13 | 联网安装依赖并下载 Chromium |
+| **Windows x64 便携版（推荐）** | [下载轻量便携 ZIP（约 49.5 MiB）](https://github.com/xtzhou25/weibo-archive/releases/download/v0.1.0-beta.2/weibo-archive-v0.1.0-beta.2-windows-x64-portable.zip) | **不需要**，自带精简 Python 运行环境；使用已安装的 Edge / Chrome | 直接启动，无需下载依赖或浏览器 |
+| 源码版 | [下载源码 ZIP](https://github.com/xtzhou25/weibo-archive/releases/download/v0.1.0-beta.2/weibo-archive-v0.1.0-beta.2-windows.zip) | 需要 Python 3.12+，推荐 3.13 | 联网安装依赖；使用已安装的 Edge / Chrome |
 
-[查看 v0.1.0-beta.1 预发布及所有附件](https://github.com/xtzhou25/weibo-archive/releases/tag/v0.1.0-beta.1) · [便携包 SHA-256 校验文件](https://github.com/xtzhou25/weibo-archive/releases/download/v0.1.0-beta.1/weibo-archive-v0.1.0-beta.1-windows-x64-portable.zip.sha256)
+[查看 v0.1.0-beta.2 预发布及所有附件](https://github.com/xtzhou25/weibo-archive/releases/tag/v0.1.0-beta.2) · [便携包 SHA-256 校验文件](https://github.com/xtzhou25/weibo-archive/releases/download/v0.1.0-beta.2/weibo-archive-v0.1.0-beta.2-windows-x64-portable.zip.sha256)
 
 GitHub 的 **Code → Download ZIP** 和发布页自动生成的 **Source code** 也是源码，需要自行准备 Python 环境。免安装包的文件名以 **`windows-x64-portable.zip`** 结尾。
 
 ## 推荐：免安装便携版
 
-适用于 **Windows 64 位（x64）**。建议 Windows 11；已在 Windows 10 22H2 x64 上验证。自带 Python 3.13.17 和扫码登录所需的 Chromium，无需安装 Python、pip 或 Playwright。
+适用于 **Windows 64 位（x64）**。建议 Windows 11；已在 Windows 10 22H2 x64 上验证。自带 Python 3.13.17 和必需依赖，无需安装 Python、pip 或 Playwright。**不再附带浏览器**：扫码优先调用已安装的 Edge，无法启动时尝试 Chrome。至少需要安装其中一种；配置页面仍由系统默认浏览器打开。
 
 1. 下载上表中的**便携 ZIP**，将整个压缩包解压到可写入的普通文件夹，例如 `D:\WeiboArchive`。不要在压缩包内直接运行，也不要只复制启动脚本。
 2. 打开解压后的 `weibo-archive-portable` 文件夹，双击 **`start_windows.bat`**。
@@ -31,13 +31,15 @@ GitHub 的 **Code → Download ZIP** 和发布页自动生成的 **Source code**
 
 启动和离线阅读无需下载额外组件；**扫码登录和微博备份仍需联网**。个人数据保存在解压目录下的 `data/`。更新时将新版本解压到另一目录，再复制完整的旧 `data/`，或用下方命令指定原数据目录；保留旧档案直至确认新版本可用。
 
+登录会使用独立的临时会话，不读取或修改日常浏览器的个人配置及已有 Cookie。非标准安装位置可设置 `WEIBO_BROWSER_PATH` 为 Edge / Chrome 完整路径。若浏览器受组织策略限制，会显示明确错误；不会自动下载 Chromium。运行时保留 Playwright 的 Node 控制驱动，它不是浏览器。精简内容见 [便携版说明](PORTABLE.md)。
+
 ## 源码版：需要安装 Python
 
 适合希望修改代码或自行管理运行环境的用户。**使用便携版时无需执行本节。**
 
 1. 安装 **Python 3.12 或更新版本**（推荐 3.13），并安装 Python Launcher（`py`）。
 2. 下载上表中的**源码 ZIP**并完整解压，也可以克隆本仓库。
-3. 双击 `start_windows.bat`。首次会创建 `.venv`，按锁定版本安装依赖并下载 Chromium，需要联网。
+3. 双击 `start_windows.bat`。首次会创建 `.venv`，按锁定版本安装依赖，需要联网；不会下载浏览器。
 4. 打开启动窗口显示的本地地址，按下文步骤使用。
 
 旧文档曾标注 Python 3.11；当前锁定依赖中的 pyee 14 要求 Python 3.12，启动器已同步检查。首次下载失败时可重新启动，已产生的备份和断点会保留。
@@ -122,6 +124,6 @@ HTML 内嵌档案数据，媒体通过同级 `media/` 读取；直接打开 HTML
 
 主程序通过 `archive/weibo_api.py` 使用项目自己的接口适配。`archive/protocol.py` 负责纯解析，`archive/transport.py` 负责 Cookie、直连和重试；`weiboutil.py` 仅保留旧函数名兼容入口。来源与许可见 [NOTICE](NOTICE.md)。
 
-依赖由 `requirements.txt` 和 `requirements.lock.txt` 固定。安装、测试及生成干净源码包的命令见 [CONTRIBUTING](CONTRIBUTING.md)。[v0.1.0-beta.1 的 GitHub Actions](https://github.com/xtzhou25/weibo-archive/actions/runs/40626302302) 已在 Windows 的 Python 3.12、3.13 上分别通过 82 项单元测试和 19 项浏览器测试。便携包另已验证包内运行时、官方二维码显示，以及无系统 Python PATH、空浏览器缓存和中文/空格目录下的启动与离线阅读。
+依赖由 `requirements.txt` 和 `requirements.lock.txt` 固定。安装、测试及生成干净源码包的命令见 [CONTRIBUTING](CONTRIBUTING.md)。[v0.1.0-beta.1 的 GitHub Actions](https://github.com/xtzhou25/weibo-archive/actions/runs/40626302302) 已在 Windows 的 Python 3.12、3.13 上分别通过 82 项单元测试和 19 项浏览器测试。v0.1.0-beta.2 的精简运行时另在本机通过 **88 项单元测试 + 19 项系统 Edge 页面测试**；已验证系统 Edge / Chrome 启动、全新临时会话显示微博官方二维码，以及无系统 Python PATH、空浏览器缓存和中文/空格目录下的三个启动器。此次未重复真实账号扫码确认和全量备份。
 
 [验证记录](VERIFICATION.md) · [更新记录](CHANGELOG.md) · [评论专项测试](LIVE_COMMENT_TEST.md) · [可见范围专项测试](LIVE_VISIBILITY_TEST.md)

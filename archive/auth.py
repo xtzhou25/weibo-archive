@@ -9,9 +9,9 @@ from playwright.async_api import async_playwright
 from .protocol import DEFAULT_HEADERS, parse_identity
 from .weibo_api import account_uid, CONFIG_URL
 from .transport import Transport, ArchiveError, backoff
+from .browser import launch_browser
 
 QR_SELECTOR = 'img[src^="https://v2.qr.weibo.cn/inf/gen?"]'
-BROWSER_ARGS = ['--no-proxy-server']
 
 
 def scoped(cookies):
@@ -33,6 +33,7 @@ class Auth:
         self.qr, self.qr_version = b'', 0
         self.task = None
         self.persist = False
+        self.browser_name = ''
         self.generation = 0
         self.checks = {'qr_code': None, 'identity_http': None}
         if self.path.exists():
@@ -50,7 +51,7 @@ class Auth:
     def status(self):
         return {'phase': self.phase, 'message': self.message, 'uid': self.uid, 'name': self.name,
                 'ready': self.ready, 'qr_ready': bool(self.qr), 'qr_version': self.qr_version,
-                'checks': dict(self.checks)}
+                'checks': dict(self.checks), 'browser': self.browser_name}
 
     async def restore(self):
         if not self.cookies:
@@ -75,6 +76,7 @@ class Auth:
         self.generation += 1
         await self.stop()
         self.persist = persist
+        self.browser_name = ''
         self.qr, self.qr_version = b'', self.qr_version + 1
         self.phase, self.message = 'opening', '正在加载微博官方二维码…'
         self.checks = {'qr_code': None, 'identity_http': None}
@@ -112,7 +114,7 @@ class Auth:
     async def _login(self, mode, generation):
         try:
             async with async_playwright() as pw:
-                browser = await pw.chromium.launch(headless=(mode == 'qr'), args=BROWSER_ARGS)
+                browser, self.browser_name = await launch_browser(pw, headless=(mode == 'qr'))
                 try:
                     context = await browser.new_context()
                     context.on('response', lambda response: self._observe(response, generation))

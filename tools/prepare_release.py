@@ -16,7 +16,7 @@ ROOT_FILES = (
     'NETWORK.md', 'READER_V2.md', 'FAILED_MEDIA_RETRY.md', 'LIVE_COMMENT_TEST.md',
     'LIVE_VISIBILITY_TEST.md', 'requirements.txt', 'requirements.lock.txt',
     'app.py', 'reader_v2.py', 'demo.py', 'weiboutil.py', 'start_windows.bat',
-    'start_reader_v2.bat',
+    'start_reader_v2.bat', 'PORTABLE.md',
 )
 SOURCE_TREES = {
     'archive': {'.py'}, 'static': {'.html', '.css', '.js'},

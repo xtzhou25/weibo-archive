@@ -1,0 +1,4 @@
+-c requirements.lock.txt
+aiohttp>=3.14,<4
+httpx>=0.28,<0.29
+playwright>=1.64,<2

@@ -1,0 +1,1 @@
+"""Local Weibo archive application."""

@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="no-referrer"><title>微博时光档案 · 离线阅读</title><style>/* READER_STYLE */</style></head>
+<body><header><a href="#">WEIBO / ARCHIVE</a><span>保存在本机的表达</span></header><main>
+<section class="intro"><p class="eyebrow">MY LOCAL ARCHIVE</p><h1>把时光，慢慢读回来。</h1><p id="summary"></p></section>
+<section class="filters"><input id="search" placeholder="搜索文字或作者" aria-label="搜索文字或作者"><select id="kind" aria-label="媒体筛选"><option value="">全部内容</option><option value="image">含图片</option><option value="video">含视频</option></select></section>
+<section class="time-filter" aria-labelledby="time-title">
+  <div class="time-heading"><h2 id="time-title">按时间阅读</h2><button id="clear-dates" type="button">清除时间筛选</button></div>
+  <p id="archive-extent" class="time-hint"></p>
+  <div class="time-presets" role="group" aria-label="快捷时间范围">
+    <button type="button" data-time-preset="all">全部时间</button><button type="button" data-time-preset="latest-month">最新月份</button><button type="button" data-time-preset="7">最近 7 天</button><button type="button" data-time-preset="30">最近 30 天</button><button type="button" data-time-preset="90">最近 90 天</button>
+  </div>
+  <div class="time-fields period-fields"><label>年份<select id="time-year" aria-label="按年份筛选"><option value="">全部年份</option></select></label><label>月份<select id="time-month" aria-label="按月份筛选" disabled><option value="">全部月份</option></select></label><div class="month-nav" id="month-nav" hidden><button id="older-month" type="button" title="跳到上一个有微博的月份">← 较早月份</button><button id="newer-month" type="button" title="跳到下一个有微博的月份">较新月份 →</button></div></div>
+  <div class="time-fields custom-dates"><label>开始日期<input id="from" type="date" aria-label="开始日期" aria-describedby="range-hint range-error"></label><span class="range-separator" aria-hidden="true">—</span><label>结束日期<input id="to" type="date" aria-label="结束日期" aria-describedby="range-hint range-error"></label></div>
+  <label id="unknown-dates-label" class="unknown-dates" hidden><input id="include-unknown" type="checkbox"><span id="unknown-dates-text"></span></label>
+  <p id="range-hint" class="time-hint" role="status" aria-live="polite"></p><p id="range-error" class="range-error" role="alert" hidden></p>
+</section>
+<div id="empty" class="empty-state" hidden><p id="empty-message"></p><button id="empty-clear-dates" type="button">清除时间筛选</button></div>
+<div id="posts"></div><button id="more">继续阅读</button></main><footer>离线文件 · 媒体只从本地加载</footer><script>/* ARCHIVE_DATA */
+/* READER_SCRIPT */</script></body></html>

@@ -19,6 +19,14 @@
 
 GitHub 的 **Code → Download ZIP** 和发布页自动生成的 **Source code** 也是源码，需要自行准备 Python 环境。免安装包的文件名以 **`windows-x64-portable.zip`** 结尾。
 
+<!-- feature-overview:v0.1.0-beta.2 -->
+## 功能说明图
+
+真实发布版界面，截图内容为虚构演示。点击图片查看高清原图。
+
+[![Weibo Archive v0.1.0-beta.2 功能说明图](https://raw.githubusercontent.com/xtzhou25/weibo-archive/main/docs/images/weibo-archive-v0.1.0-beta.2-feature-overview.jpg)](https://raw.githubusercontent.com/xtzhou25/weibo-archive/main/docs/images/weibo-archive-v0.1.0-beta.2-feature-overview.jpg)
+<!-- /feature-overview:v0.1.0-beta.2 -->
+
 ## 推荐：免安装便携版
 
 适用于 **Windows 64 位（x64）**。建议 Windows 11；已在 Windows 10 22H2 x64 上验证。自带 Python 3.13.17 和必需依赖，无需安装 Python、pip 或 Playwright。**不再附带浏览器**：扫码优先调用已安装的 Edge，无法启动时尝试 Chrome。至少需要安装其中一种；配置页面仍由系统默认浏览器打开。
